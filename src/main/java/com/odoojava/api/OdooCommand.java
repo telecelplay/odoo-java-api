@@ -185,6 +185,7 @@ public class OdooCommand {
                     new Object[] { fieldList, rows, "init", "", false, session.getContext() });
         } else {
             System.out.println("importData is a legacy method for odoo version <= 9");
+            return new Object[]{};
         }
     }
 
