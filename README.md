@@ -1,20 +1,15 @@
 Odoo Java Api
 ================
 
-This repo has been forked because of the project https://github.com/DeBortoliWines/openerp-java-api/issues/31 
-
+This repo has been forked from [theis project](https://github.com/odoo-java/odoo-java-api) in order to upgrade version to odoo 15 and make it available on maven central so it can easiliy be use in [Meveo](https://github.com/meveo-org/meveo)
+ 
 A Java API to connect to Odoo and manage data using the XMLRPC interface.
 
 The API reduces the amount of boiler plate code needed to communicate with Odoo 
 by doing error checking and type conversions.
 
 
-The Api IS known to work perfectly :
-* openerp-java-api-1.3.0 works perfectly up to OpenERP v7 : https://github.com/DeBortoliWines/openerp-java-api/
-* openerp-java-api-2.0.x si supposed to work with the new API introduced in odoo v8 : https://github.com/DeBortoliWines/openerp-java-api/
-** Take care, the package name have replace openerp by odoo so that compatibility is broken
-* openerp-java-api-3.0.x , package renamed, tested on Odoo v10 and Odoov12
-** purposed is to be pushed on maven for pentaho integration
+The Api as been partially tested on odoo 15
 
 For more information, including a Wiki please see the project on SourceForge: 
 [https://sourceforge.net/projects/openerpjavaapi/](https://sourceforge.net/projects/openerpjavaapi)
