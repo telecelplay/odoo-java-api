@@ -1,7 +1,7 @@
 Odoo Java Api
 ================
 
-This repo has been forked from [theis project](https://github.com/odoo-java/odoo-java-api) in order to upgrade version to odoo 15 and make it available on maven central so it can easiliy be use in [Meveo](https://github.com/meveo-org/meveo)
+This repo has been forked from [this project](https://github.com/odoo-java/odoo-java-api) in order to upgrade version to odoo 15 and make it available on maven central so it can easiliy be use in [Meveo](https://github.com/meveo-org/meveo)
  
 A Java API to connect to Odoo and manage data using the XMLRPC interface.
 
