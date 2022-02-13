@@ -19,7 +19,7 @@
 package com.odoojava.api;
 
 import java.util.*;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,10 +27,13 @@ import java.nio.ByteBuffer;
 
 import org.apache.xmlrpc.XmlRpcException;
 
+
 import com.odoojava.api.OdooXmlRpcProxy.RPCProtocol;
 import com.odoojava.api.OdooXmlRpcProxy.RPCServices;
+/*
 import com.googlecode.jsonrpc4j.*;
 import com.googlecode.jsonrpc4j.JsonRpcClientException;
+*/
 
 /**
  * *
@@ -38,14 +41,6 @@ import com.googlecode.jsonrpc4j.JsonRpcClientException;
  * server.
  *
  * @author Pieter van der Merwe
- *
- */
-/**
- * @author florent
- *
- */
-/**
- * @author florent
  *
  */
 /**
@@ -70,9 +65,10 @@ public class Session {
 	private Version serverVersion;
 
 	private URL jsonurl;
-	private JsonRpcHttpClient jsonclient;
+	//private JsonRpcHttpClient jsonclient;
 	// private Object[] login_args;
 
+	/*
 	public URL getJsonurl(String entryPoint) {
 		String protocol_str = "";
 		switch (this.protocol) {
@@ -96,7 +92,7 @@ public class Session {
 
 		this.jsonurl = urljson;
 		return this.jsonurl;
-	}
+	}*/
 
 	/**
 	 * * Session constructor
@@ -117,21 +113,22 @@ public class Session {
 		this.userName = userName;
 		this.password = password;
 		this.objectClient = new OdooXmlRpcProxy(protocol, host, port, RPCServices.RPC_OBJECT);
-		try {
-			setJsonClient();
-		} catch (MalformedURLException e) {
+		//try {
+		//	setJsonClient();
+		//} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 
 	}
 
+	/*
 	private void setJsonClient() throws MalformedURLException {
 		// TODO Auto-generated method stub
 		JsonRpcHttpClient client = new JsonRpcHttpClient(getJsonurl(""));
 		jsonclient = client;
 
-	}
+	}*/
 
 	/**
 	 * * Session constructor. Uses default http protocol to connect.
@@ -183,8 +180,8 @@ public class Session {
 
 	private void checkVersionCompatibility() throws XmlRpcException, OdooApiException {
 
-		if (this.getServerVersion().getMajor() < 8 || this.getServerVersion().getMajor() > 14) {
-			throw new OdooApiException("Only Odoo Version from v8.x to 14.x are maintained. "
+		if (this.getServerVersion().getMajor() < 8 || this.getServerVersion().getMajor() > 15) {
+			throw new OdooApiException("Only Odoo Version from v8.x to 15.x are maintained. "
 					+ "Please choose another version of the library");
 		}
 
@@ -220,7 +217,7 @@ public class Session {
 		OdooXmlRpcProxy commonClient = new OdooXmlRpcProxy(protocol, host, port, RPCServices.RPC_COMMON);
 		Object id = commonClient.execute("login", new Object[] { databaseName, userName, password });
 
-		// JSONRPC part
+		/* JSONRPC part
 		try {
 			id = authenticate_json_rpc();
 			System.out.println("json rpc login");
@@ -232,7 +229,7 @@ public class Session {
 			System.out.println("General exception");
 			e.printStackTrace();
 		} 
-
+        */
 		if (id instanceof Integer) {
 			userID = (Integer) id;
 		} else {
@@ -242,6 +239,7 @@ public class Session {
 		return userID;
 	}
 
+	/*
 	private int authenticate_json_rpc() throws Throwable {
 		// TODO: fast and uggly implementation of json rpc, has to be refactored in the
 		// future
@@ -257,8 +255,9 @@ public class Session {
 
 		Map<String, Object> result =  jsonclient.invoke("call", articleMapOne, HashMap.class);
 		return (int) result.get("uid");
-	}
+	}*/
 
+	/*
 	public Object[] call_report_jsonrpc(String reportModel, String reportMethod, ArrayList<Object> args)
 			throws Throwable {
 		// TODO: fast and uggly implementation of json rpc, has to be reafctored in the
@@ -283,7 +282,7 @@ public class Session {
 
 		return result;
 
-	}
+	}*/
 
 	void checkDatabasePresenceSafe() {
 		// 21/07/2012 - Database listing may not be enabled (--no-database-list
@@ -483,19 +482,19 @@ public class Session {
 		byte[] finalResults;
 
 		Object[] reportParams = new Object[] { databaseName, userID, password, reportName, ids };
-		if (getServerVersion().getMajor() < 11) {
-			OdooXmlRpcProxy client = new OdooXmlRpcProxy(protocol, host, port, RPCServices.RPC_REPORT);
-			Map<String, Object> result = (Map<String, Object>) client.execute(reportMethod, reportParams);
-			finalResults = DatatypeConverter.parseBase64Binary((String) result.get("result"));
+		//if (getServerVersion().getMajor() < 11) {
+		//	OdooXmlRpcProxy client = new OdooXmlRpcProxy(protocol, host, port, RPCServices.RPC_REPORT);
+		//	Map<String, Object> result = (Map<String, Object>) client.execute(reportMethod, reportParams);
+		//	finalResults = DatatypeConverter.parseBase64Binary((String) result.get("result"));
 
-		} else {
+		//} else {
 			// Implement changes thanks to
 			// https://github.com/OCA/odoorpc/issues/20
 			OdooXmlRpcProxy client = new OdooXmlRpcProxy(protocol, host, port, RPCServices.RPC_OBJECT);
 			ByteBuffer result = (ByteBuffer) this.executeCommandWithContext("ir.actions.report", reportMethod,
 					reportParams);
 			finalResults = result.array();
-		}
+		//}
 		return finalResults;
 
 	}
@@ -518,9 +517,10 @@ public class Session {
 		return context;
 	}
 
+	/*
 	public JsonRpcHttpClient getJsonclient() {
 		return jsonclient;
-	}
+	}*/
 
 	public Object[] getLogin_args() {
 		Object[] args = new Object[] { databaseName, userID, password };

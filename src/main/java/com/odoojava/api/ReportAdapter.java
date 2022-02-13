@@ -21,8 +21,8 @@ package com.odoojava.api;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+//import java.nio.charset.StandardCharsets;
+//import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -118,9 +118,9 @@ public class ReportAdapter {
 	public byte[] getPDFReportAsByte(String reportName, Object[] ids) throws Throwable {
 		checkReportName(reportName);
 		byte[] reportDatas;
-		if (this.serverVersion.getMajor() < 11) {
+		//if (this.serverVersion.getMajor() < 11) {
 			reportDatas = session.executeReportService(reportName, this.getReportMethod(), ids);
-		} else {
+		/*} else {
 			ArrayList<Object> reportParams = new ArrayList<Object>();
 			reportParams.add( getReportID());
 			reportParams.add( ids);
@@ -128,7 +128,7 @@ public class ReportAdapter {
 
 			String pdf_string= (String) result[0]; 
 			reportDatas = pdf_string.getBytes(StandardCharsets.ISO_8859_1);
-		}
+		}*/
 		return reportDatas;
 	}
 
